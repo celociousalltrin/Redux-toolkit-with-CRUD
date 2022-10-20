@@ -20,10 +20,15 @@ const AuthorDetails = () => {
   const AuthorDetails = AuthorList.filter(({ userId }) => {
     return userId == getValue;
   });
-
+console.log(Object.keys(AuthorDetails).length === 0)
   return (
     <div>
-      <AuthorData AuthorDetails={AuthorDetails} getValue={getValue} />
+      {Object.keys(AuthorDetails).length === 0 ? (
+        <h1>Loading....</h1>
+      ) : (
+        
+        <AuthorData AuthorDetails={AuthorDetails} getValue={getValue} />
+      )}
     </div>
   );
 };

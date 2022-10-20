@@ -1,7 +1,7 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useState, useEffect } from "react";
-import { GetData, addAuthor } from "../../Feature/UserSlice";
+import { GetData, addAuthor, removeClean } from "../../Feature/UserSlice";
 import { useDispatch, useSelector } from "react-redux";
 import HomeTable from "./HomeTable";
 import {
@@ -20,11 +20,14 @@ const Home = () => {
   const [authorName, setAuthorName] = useState("");
 
   const UserList = useSelector((state) => state.UserInfo.value);
+  console.log(UserList)
   const dispatch = useDispatch();
 
-  
   useEffect(() => {
     dispatch(GetData());
+    return ()=>{
+      dispatch(removeClean())
+    }
   }, [dispatch]);
 
   const handleClose = () => setShow(false);

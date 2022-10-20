@@ -29,6 +29,11 @@ export const UserSlice = createSlice({
       });
     },
 
+    //*In this value is initialState
+    removeClean:(state)=>{
+      state.value =[];
+    },
+
     deleteAuthor: (state, action) => {
       state.value = state.value.filter(
         (item) => item.userId !== action.payload.userId
@@ -39,8 +44,8 @@ export const UserSlice = createSlice({
       state.value.push(action.payload);
     },
 
-    deleteAuthorBook: (state, action) => {
-      state.value = state.value.filter((item) => item.id !== action.payload.id);
+    deleteAuthorBook: (state, {payload}) => {
+      state.value = state.value.filter((item) => item.id !== payload.id);
     },
   },
 
@@ -48,14 +53,15 @@ export const UserSlice = createSlice({
     [GetData.pending]: () => {
       console.log("pending");
     },
-    [GetData.fulfilled]: (state, action) => {
-      return { ...state, value: action.payload };
+    [GetData.fulfilled]: (state, {payload}) => {
+      return { ...state, value: payload };
     },
     [GetData.rejected]: () => {
       console.log("rejected");
     },
   },
 });
+
 
 
 export default UserSlice.reducer;
@@ -65,4 +71,5 @@ export const {
   updateAuthor,
   addAuthorBook,
   deleteAuthorBook,
+  removeClean,
 } = UserSlice.actions;

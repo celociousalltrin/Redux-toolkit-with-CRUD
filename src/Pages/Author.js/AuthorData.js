@@ -18,7 +18,7 @@ const AuthorData = ({ AuthorDetails, getValue }) => {
     bookName: "",
     bookContent: "",
   });
-console.log(addBook)
+
   const dispatch = useDispatch();
 
   const handleClose = () => setShow(false);

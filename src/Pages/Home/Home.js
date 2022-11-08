@@ -4,6 +4,8 @@ import { useState, useEffect } from "react";
 import { GetData, addAuthor, removeClean } from "../../Feature/UserSlice";
 import { useDispatch, useSelector } from "react-redux";
 import HomeTable from "./HomeTable";
+import { UseUserContext } from "../../Component/Utilities/Context";
+
 import {
   Container,
   Row,
@@ -19,15 +21,17 @@ const Home = () => {
   const [show, setShow] = useState(false);
   const [authorName, setAuthorName] = useState("");
 
+  const { toggleTheme } = UseUserContext();
+
   const UserList = useSelector((state) => state.UserInfo.value);
-  console.log(UserList)
+
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(GetData());
-    return ()=>{
-      dispatch(removeClean())
-    }
+    return () => {
+      dispatch(removeClean());
+    };
   }, [dispatch]);
 
   const handleClose = () => setShow(false);
@@ -38,8 +42,8 @@ const Home = () => {
     setShow(false);
     return dispatch(
       addAuthor({
-        userId: UserList[UserList.length - 1].userId + 1,
-        id: UserList[UserList.length - 1].id + 1,
+        userId: UserList[0].userId - 1,
+        id: UserList[0].id - 1,
         name: authorName,
       })
     );
@@ -54,7 +58,7 @@ const Home = () => {
   const AuthorName = RemoveDuplicateName(UserList, "userId");
 
   return (
-    <>
+    <div className="cls">
       <Container>
         <Row>
           <Col>
@@ -66,6 +70,8 @@ const Home = () => {
               />
               <InputGroup.Text id="basic-addon2">Search Author</InputGroup.Text>
             </InputGroup>
+
+            <Button onClick={toggleTheme}>Change color</Button>
 
             <Button variant="success" onClick={handleShow} className="mb-5">
               Add Author
@@ -108,7 +114,7 @@ const Home = () => {
           </Col>
         </Row>
       </Container>
-    </>
+    </div>
   );
 };
 

@@ -18,7 +18,7 @@ export const UserSlice = createSlice({
 
   reducers: {
     addAuthor: (state, action) => {
-      state.value.push(action.payload);
+      state.value.unshift(action.payload);
     },
 
     updateAuthor: (state, action) => {

@@ -11,9 +11,8 @@ const HomeTable = ({ AuthorName, query }) => {
   const [show, setShow] = useState(false);
   const [editAuthor, setEditAuthor] = useState("");
   const [edit, setEdit] = useState(0);
-  const [view, setView] = useState({})
+  const [view, setView] = useState(1);
 
-  console.log(view)
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -23,18 +22,18 @@ const HomeTable = ({ AuthorName, query }) => {
     let item = AuthorName[userId - 1];
     setShow(true);
     setEdit(userId);
-    setEditAuthor(item.name);
-    console.log(userId)
+    setEditAuthor(item?.name);
+    console.log(userId);
   };
 
   const handleView = (userId) => {
-    setView((prev) => (prev.view !== userId ? userId : ""));
+    setView(userId);
   };
 
   return (
-    <div>
-      <Table striped bordered hover size="lg" className="text-center">
-        <thead className="bg-primary text-white h3">
+    <div className="main">
+      <Table bordered="lg" className="text-center">
+        <thead>
           <tr>
             <th>#</th>
             <th>Author Name</th>
@@ -43,12 +42,13 @@ const HomeTable = ({ AuthorName, query }) => {
             <th>Delete</th>
           </tr>
         </thead>
-        <tbody className="h4">
+        <tbody>
           {AuthorName.filter((item) =>
             item.name?.toLowerCase().includes(query)
           ).map(({ id, name, userId, title }, index, arr) => {
             return (
               <tr key={id}>
+                {/* In this we can write anty property name  */}
                 {title ? (
                   <td
                     onClick={() => handleView(userId)}
@@ -56,14 +56,10 @@ const HomeTable = ({ AuthorName, query }) => {
                   >
                     {index + 1}
                   </td>
-                ) : (
-                  <td>{index + 1}</td>
-                )}
-                <td>
+                ): <td>{index+1}</td>}
+                <td className="main">
                   {name} <br />
-                  {view === userId ? (
-                    <p style={{ color: "green", fontSize: "45px" }}>{title}</p>
-                  ) : null}
+                  {view === userId ? <p>{title}</p> : null}
                 </td>
                 <td>
                   <AiFillEye
@@ -106,7 +102,7 @@ const HomeTable = ({ AuthorName, query }) => {
                   type="text"
                   placeholder="name..."
                   onChange={(e) => setEditAuthor(e.target.value)}
-                  value={editAuthor}
+                  value={editAuthor || ""}
                 />
               </Form.Group>
             </Form>
@@ -133,7 +129,6 @@ const HomeTable = ({ AuthorName, query }) => {
                 >
                   Save
                 </Button>
-                
               )}
             </Modal.Footer>
           </Modal>

@@ -36,3 +36,52 @@
     transform: rotate(360deg);
   }
 }
+
+/* This css is for dark and light mode */
+#light {
+  background-color: white;
+}
+
+#dark {
+  background-color: black;
+}
+
+#light .main > Table {
+  border-color: black;
+}
+
+#dark .main > Table {
+  border-color: #808080;
+}
+
+#light .main > Table > thead{
+  color: blue;
+  font-size: xx-large;
+}
+
+#dark .main > Table > thead{
+  color: yellow;
+  font-size: xx-large;
+}
+
+#light .main > Table > tbody{
+  font-size: x-large;
+  color: black;
+}
+
+#light .main > Table > tbody > tr > td > p{
+  font-size: large;
+  color: green;
+  font-weight: 500;
+}
+
+#dark .main > Table > tbody{
+  font-size: x-large;
+  color: white;
+}
+
+#dark .main > Table > tbody > tr > td > p{
+  font-size: large;
+  color: green;
+  font-weight: 500;
+}

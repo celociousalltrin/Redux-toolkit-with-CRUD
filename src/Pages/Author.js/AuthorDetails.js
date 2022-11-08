@@ -23,12 +23,10 @@ const AuthorDetails = () => {
 console.log(Object.keys(AuthorDetails).length === 0)
   return (
     <div>
-      {Object.keys(AuthorDetails).length === 0 ? (
-        <h1>Loading....</h1>
-      ) : (
+
         
         <AuthorData AuthorDetails={AuthorDetails} getValue={getValue} />
-      )}
+
     </div>
   );
 };
